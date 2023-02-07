@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../index.ts"],
+  "sourcesContent": ["\nimport { Web3Storage, getFilesFromPath } from \"web3.storage\"\nimport { Web3Response } from \"web3.storage/dist/src/lib/interface\"\n\nconst token = process.env['WEB3STORAGE_API_TOKEN']\n\n// Construct with token and endpoint\nconst client: Web3Storage = new Web3Storage({ token })\n\nasync function uploadAndRetriveFiles() {\n  const filesToUpload = await getFilesFromPath('./files')\n  const rootCid = await client.put(filesToUpload)\n\n  console.log(rootCid)\n\n  const res = await client.get(rootCid)\n  const files = await res?.files()\n  for (const file of files!) {\n    console.log(`${file.cid} ${file.name} ${file.size}`)\n  }\n}\n\nuploadAndRetriveFiles()\n\n\n\n\n\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;AACA,kBAA8C;AAG9C,MAAM,QAAQ,QAAQ,IAAI;AAG1B,MAAM,SAAsB,IAAI,wBAAY,EAAE;AAE9C,uCAAuC;AACrC,QAAM,gBAAgB,MAAM,kCAAiB;AAC7C,QAAM,UAAU,MAAM,OAAO,IAAI;AAEjC,UAAQ,IAAI;AAEZ,QAAM,MAAM,MAAM,OAAO,IAAI;AAC7B,QAAM,QAAQ,MAAM,4BAAK;AACzB,aAAW,QAAQ,OAAQ;AACzB,YAAQ,IAAI,GAAG,KAAK,OAAO,KAAK,QAAQ,KAAK;AAAA;AAAA;AAIjD;",
+  "names": []
+}
